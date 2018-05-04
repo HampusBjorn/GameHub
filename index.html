@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Concert+One" rel="stylesheet">
+
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="Css/CssIndex.css">
+	<script src="JavaS/idleTimer.js"></script>
+	<script src="JavaS/money.js"></script>
+	<script src="JavaS/Load.js"></script>
+	<script src="JavaS/HotKeys.js"></script>
+	<title>0 $</title>
+	<link rel='shortcut icon' type='image/x-icon' href='pictures/favicon.ico' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body id="Body">
+
+<div class="site">
+	<img src="pictures/cog.svg" onclick="openNav()" class="cog">
+
+
+	<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+    <a href="#" onclick="save();closeNav()">Save</a>
+    <a href="#" onclick="reset();closeNav()">Reset</a>
+    <a href="#" onclick="statsOpen()">Stats</a>
+    <div id="StatDiv" class="StatDiv">
+    <p id="dpss"></p>
+    <p id="mpc"></p>
+    <p id="clickAmount"></p>
+</div>
+    </div>
+  </div>
+
+			<br><br>
+
+
+
+	<div class="upgrades">
+</div>
+
+
+
+	<div class="menu">
+		<div class="köpmeny1">
+
+		</div>
+
+		<div class="autoClick" id="borderFix" onclick="buyAutoClick()">
+			
+				<p class="autoClick1" href="#">City</p>
+
+				<p class="price" id="costAutoClick"></p>
+				
+				<p class="ammounts" id="ammountAutoClick">0</p>
+		</div>
+
+		<div class="border"></div>
+
+		<div class="autoClick" onclick="buyAutoClick2()">
+			
+				<p class="shares1" href="#">Country</p>
+
+				<p class="price2" id="costshares"></p>
+				
+				<p class="ammounts" id="ammountshares">0</p>
+		</div>
+
+		<div class="border"></div>
+
+
+		<div class="autoClick" onclick="buyAutoClick3()">
+			
+				<p class="shares1" href="#">Continent</p>
+
+				<p class="price2" id="costowner"></p>
+				
+				<p class="ammounts" id="ammountowner">0</p>
+		</div>
+
+		<div class="border"></div>
+
+				<div class="autoClick" onclick="buyAutoClick4()">
+			
+				<p class="shares1" href="#">Planet</p>
+
+				<p class="price2" id="costTruck"></p>
+				
+				<p class="ammounts" id="ammountTruck">0</p>
+		</div>
+
+		<div class="border"></div>
+
+		<div class="autoClick" onclick="buyAutoClick5()">
+			
+				<p class="shares1" href="#">Galaxy</p>
+
+				<p class="price2" id="costStorage"></p>
+				
+				<p class="ammounts" id="ammountStorage">0</p>
+		</div>
+
+		<div class="border"></div>
+	</div>
+
+	<div class="insultsPos">
+        <div id="myProgress">
+  <div id="myBar">0%</div>
+</div>
+	<div class="space">
+  <div class="ship">
+    <div class="ship-rotate">
+      <div class="pod"></div>
+      <div class="fuselage"></div>
+    </div>
+  </div>
+  <div class="ship-shadow"></div>
+  <div class="mars">
+    <div class="flag">
+    </div>
+    <div class="planet">
+      <div class="surface"></div>
+      <div class="crater1"></div>
+      <div class="crater2"></div>
+      <div class="crater3"></div>
+    </div>
+  </div>
+  <div class="test"></div>
+</div>
+	</div>
+
+	<div class="clickPlace">
+
+		<div class="imageBorder"><a id="track1" class="imagelink" href="#" onclick="add()"><div class="image"></div></a></div>
+
+		<div class="money1">
+	
+			<input  type="text" id="text" disabled style=" text-align: center;">
+		</div>
+
+	</div>
+
+
+
+	<div class="upgrades2" id="upgrades2">
+		<div class="ClickUpgrade1" id="ClickUpgrade1" onclick="ClickUpgrade1()">
+			<img class="upgCherry" src="pictures/upgCherry.svg">			  <span class="textw">Click 2X <p class="textww" id="costClick"></p></span>
+		</div>
+
+		<div class="ClickUpgrade1" id="ClickUpgrade2" onclick="ClickUpgrade2()">
+				<img class="upgCross" src="pictures/upgCross.svg">
+				<span class="textw">Click 1% off dps <p class="textww" id="costClick2"></p></span>
+		</div>
+
+	</div>
+
+
+</div>
+</body>
+
+</html>
