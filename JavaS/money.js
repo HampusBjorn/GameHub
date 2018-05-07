@@ -94,6 +94,7 @@
     var progress3 = 50;
     var surfaceColor = "#FFF";
     var isSurfaceColorTrue = 0;
+    var dps3 = 0;
 
 	function timer() {
 		moneycount = moneycount + (dps/100);
@@ -120,7 +121,7 @@ if (upgradeNR == 1) {
         }
         else {
         clickvalue = clickvalue * 2;
-            insideText.innerHTML = "double cash by click!";
+            insideText.innerHTML = "double cash per click!";
             console.log("test");
             price1 = 15;
             price2 = 100;
@@ -153,12 +154,8 @@ if (upgradeNR == 1) {
             price5 = 130000;
     }
     else if (upgradeNR == 4) {
-        price1 = 15 * 0.90;
-        price2 = 100 * 0.90;
-        price3 = 1100 * 0.90;
-        price4 = 12000 * 0.90;
-        price5 = 130000 * 0.90;
-        insideText.innerHTML = "Shop is cheaper!";
+        dps3 += (dps * 0.02);
+        insideText.innerHTML = "2% of CPS per second";
         console.log("test");
     }
         newPlanetRes();
@@ -188,6 +185,8 @@ function newPlanetRes() {
 	ammount4 = 0;
 	ammount5 = 0;
     dps = 0;
+    dps = dps3;
+    dps3 = 0;
     price1T = price1;
     price2T = price2;
     price3T = price3;
