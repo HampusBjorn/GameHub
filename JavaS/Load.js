@@ -266,8 +266,29 @@ function load() {
 				else {
 				localStorage.setItem("upgradeActive1", upgradeActive1);
 			}
+    
+           if (localStorage.isSurfaceColorTrue >= 0) {
+				isSurfaceColorTrue = localStorage.getItem("isSurfaceColorTrue");
+				isSurfaceColorTrue = parseFloat(isSurfaceColorTrue);
+                console.log("h")
+				}
 
-			if (localStorage.clickAmount >= 0) {
+				else {
+				localStorage.setItem("isSurfaceColorTrue", isSurfaceColorTrue);
+                    console.log("d")
+			}
+
+			if ("surfaceColor" in localStorage) {
+				surfaceColor = localStorage.getItem("surfaceColor");
+                console.log("h")
+				}
+
+				else {
+				localStorage.setItem("surfaceColor", surfaceColor);
+                    console.log("d")
+			}
+    
+            if (localStorage.clickAmount >= 0) {
 				clickAmount = localStorage.getItem("clickAmount");
 				clickAmount = parseFloat(clickAmount);
 				}

@@ -1,151 +1,3 @@
-(function (workerScript) {
-	if (!/MSIE 10/i.test (navigator.userAgent)) {
-		try {
-			var blob = new Blob (["\
-var fakeIdToId = {};\
-onmessage = function (event) {\
-	var data = event.data,\
-		name = data.name,\
-		fakeId = data.fakeId,\
-		time;\
-	if(data.hasOwnProperty('time')) {\
-		time = data.time;\
-	}\
-	switch (name) {\
-		case 'setInterval':\
-			fakeIdToId[fakeId] = setInterval(function () {\
-				postMessage({fakeId: fakeId});\
-			}, time);\
-			break;\
-		case 'clearInterval':\
-			if (fakeIdToId.hasOwnProperty (fakeId)) {\
-				clearInterval(fakeIdToId[fakeId]);\
-				delete fakeIdToId[fakeId];\
-			}\
-			break;\
-		case 'setTimeout':\
-			fakeIdToId[fakeId] = setTimeout(function () {\
-				postMessage({fakeId: fakeId});\
-				if (fakeIdToId.hasOwnProperty (fakeId)) {\
-					delete fakeIdToId[fakeId];\
-				}\
-			}, time);\
-			break;\
-		case 'clearTimeout':\
-			if (fakeIdToId.hasOwnProperty (fakeId)) {\
-				clearTimeout(fakeIdToId[fakeId]);\
-				delete fakeIdToId[fakeId];\
-			}\
-			break;\
-	}\
-}\
-"]);
-			// Obtain a blob URL reference to our worker 'file'.
-			workerScript = window.URL.createObjectURL(blob);
-		} catch (error) {
-			/* Blob is not supported, use external script instead */
-		}
-	}
-	var worker,
-		fakeIdToCallback = {},
-		lastFakeId = 0,
-		maxFakeId = 0x7FFFFFFF, // 2 ^ 31 - 1, 31 bit, positive values of signed 32 bit integer
-		logPrefix = 'HackTimer.js by turuslan: ';
-	if (typeof (Worker) !== 'undefined') {
-		function getFakeId () {
-			do {
-				if (lastFakeId == maxFakeId) {
-					lastFakeId = 0;
-				} else {
-					lastFakeId ++;
-				}
-			} while (fakeIdToCallback.hasOwnProperty (lastFakeId));
-			return lastFakeId;
-		}
-		try {
-			worker = new Worker (workerScript);
-			window.setInterval = function (callback, time /* , parameters */) {
-				var fakeId = getFakeId ();
-				fakeIdToCallback[fakeId] = {
-					callback: callback,
-					parameters: Array.prototype.slice.call(arguments, 2)
-				};
-				worker.postMessage ({
-					name: 'setInterval',
-					fakeId: fakeId,
-					time: time
-				});
-				return fakeId;
-			};
-			window.clearInterval = function (fakeId) {
-				if (fakeIdToCallback.hasOwnProperty(fakeId)) {
-					delete fakeIdToCallback[fakeId];
-					worker.postMessage ({
-						name: 'clearInterval',
-						fakeId: fakeId
-					});
-				}
-			};
-			window.setTimeout = function (callback, time /* , parameters */) {
-				var fakeId = getFakeId ();
-				fakeIdToCallback[fakeId] = {
-					callback: callback,
-					parameters: Array.prototype.slice.call(arguments, 2),
-					isTimeout: true
-				};
-				worker.postMessage ({
-					name: 'setTimeout',
-					fakeId: fakeId,
-					time: time
-				});
-				return fakeId;
-			};
-			window.clearTimeout = function (fakeId) {
-				if (fakeIdToCallback.hasOwnProperty(fakeId)) {
-					delete fakeIdToCallback[fakeId];
-					worker.postMessage ({
-						name: 'clearTimeout',
-						fakeId: fakeId
-					});
-				}
-			};
-			worker.onmessage = function (event) {
-				var data = event.data,
-					fakeId = data.fakeId,
-					request,
-					parameters,
-					callback;
-				if (fakeIdToCallback.hasOwnProperty(fakeId)) {
-					request = fakeIdToCallback[fakeId];
-					callback = request.callback;
-					parameters = request.parameters;
-					if (request.hasOwnProperty ('isTimeout') && request.isTimeout) {
-						delete fakeIdToCallback[fakeId];
-					}
-				}
-				if (typeof (callback) === 'string') {
-					try {
-						callback = new Function (callback);
-					} catch (error) {
-						console.log (logPrefix + 'Error parsing callback code string: ', error);
-					}
-				}
-				if (typeof (callback) === 'function') {
-					callback.apply (window, parameters);
-				}
-			};
-			worker.onerror = function (event) {
-				console.log (event);
-			};
-			console.log (logPrefix + 'Initialisation succeeded');
-		} catch (error) {
-			console.log (logPrefix + 'Initialisation failed');
-			console.error (error);
-		}
-	} else {
-		console.log (logPrefix + 'Initialisation failed - HTML5 Web Worker is not supported');
-	}
-}) ('HackTimerWorker.js');
 
 	function update() {
 		document.getElementById('text').value = thousands_separators(moneycount.toFixed(1)) + "$"
@@ -180,10 +32,17 @@ onmessage = function (event) {\
 		document.getElementById('dpss').innerHTML = "MPS" + " " + thousands_separators(dps.toFixed(1));
 		document.getElementById('clickAmount').innerHTML = "Clicks Done" + " " + thousands_separators(clickAmount);
 		document.getElementById('mpc').innerHTML = "Clicks Per Second" + " " + thousands_separators(clickvalue.toFixed(1));
+        document.getElementById("surface").style.background = surfaceColor;
 
         if (moneycount >= progress) {
-            progress += 1000;
+            progress += progress3;
             progressBar();
+            if ((width >= 100) && (progress2 == 0)) {
+            progress2 = progress3 * 100;
+                progress3 = progress3 * 2;
+                        console.log("hello")
+        document.getElementById("testBtn").style.display = "block";
+            }
         }
 
 	}
@@ -199,8 +58,13 @@ onmessage = function (event) {\
 	var price3 = 1100;
 	var price4 = 12000;
 	var price5 = 130000;
-	var price6 = 1000;
-	var price7 = 2000;
+    var price1T = 15;
+	var price2T = 100;
+	var price3T = 1100;
+	var price4T = 12000;
+	var price5T = 130000;
+    var price6 = 10000000;
+    var price7 = 10000000;
 	var ammount1 = 0;
 	var ammount2 = 0;
 	var ammount3 = 0;
@@ -223,8 +87,13 @@ onmessage = function (event) {\
 	var stats = 0;
 	var ups = 0;
     var width = 0;
-    var progress = 1000;
+    var progress = 50;
     var widthMax = 100;
+    var dps2 = 0;
+    var progress2 = 0;
+    var progress3 = 50;
+    var surfaceColor = "#FFF";
+    var isSurfaceColorTrue = 0;
 
 	function timer() {
 		moneycount = moneycount + (dps/100);
@@ -233,6 +102,108 @@ onmessage = function (event) {\
 
 	setInterval(timer, 10)
 
+function Anim(){
+    var alert = confirm("This action will reset your progress but give you an upgrade! Are you sure?");
+    var insideText = document.getElementById('upgradeContent');
+       var upgradeNR = Math.floor((Math.random() * 4) + 1);
+    if (alert == true) {
+if (upgradeNR == 1) {
+        if(clickvalue <= 1) {
+            clickvalue += 3;
+            insideText.innerHTML = "more cash by click!";
+            console.log("test");
+            price1 = 15;
+            price2 = 100;
+	        price3 = 1100;
+            price4 = 12000;
+            price5 = 130000;
+        }
+        else {
+        clickvalue = clickvalue * 2;
+            insideText.innerHTML = "double cash by click!";
+            console.log("test");
+            price1 = 15;
+            price2 = 100;
+	        price3 = 1100;
+            price4 = 12000;
+            price5 = 130000;
+        }
+    }
+    else if (upgradeNR == 2) {
+        clickvalue += (dps * 0.03);
+        insideText.innerHTML = "click gains 3% of CPS!";
+            price1 = 15;
+            price2 = 100;
+	        price3 = 1100;
+            price4 = 12000;
+            price5 = 130000;
+    }  
+    else if (upgradeNR == 3) {
+        autoClick = autoClick * 1.10;
+        autoClick2 = autoClick2 * 1.10;
+        autoClick3 = autoClick3 * 1.10;
+        autoClick4 = autoClick4 * 1.10;
+        autoClick5 = autoClick5 * 1.10;
+        insideText.innerHTML = "10% more from everything in shop!";
+        console.log("test");
+            price1 = 15;
+            price2 = 100;
+	        price3 = 1100;
+            price4 = 12000;
+            price5 = 130000;
+    }
+    else if (upgradeNR == 4) {
+        price1 = 15 * 0.90;
+        price2 = 100 * 0.90;
+        price3 = 1100 * 0.90;
+        price4 = 12000 * 0.90;
+        price5 = 130000 * 0.90;
+        insideText.innerHTML = "Shop is cheaper!";
+        console.log("test");
+    }
+        newPlanetRes();
+    document.getElementById("testBtn").style.display = "none";
+    console.log(upgradeNR)
+    document.getElementById("planetTrans").style.webkitAnimationPlayState = "running";
+    var y = document.getElementById('Planet#').innerHTML;
+        document.getElementById('Planet#').innerHTML = y;
+    var myInterval = setInterval(function(){ reAni() }, 20000);
+    
+    function reAni(){
+        surfaceColor = "#FF7F4F";
+        document.getElementById("surface").style.background = surfaceColor;
+        var x = document.getElementById('space').innerHTML;
+        document.getElementById('space').innerHTML = x;
+        clearInterval(myInterval);
+     }
+    }
+}
+
+function newPlanetRes() {
+    var elem = document.getElementById("myBar"); 
+    moneycount = 0;
+    ammount1 = 0;
+	ammount2 = 0;
+	ammount3 = 0;
+	ammount4 = 0;
+	ammount5 = 0;
+    dps = 0;
+    price1T = price1;
+    price2T = price2;
+    price3T = price3;
+    price4T = price4;
+    price5T = price5;     
+    price1 = price1T;
+    price2 = price2T;
+    price3 = price3T;
+    price4 = price4T;   
+    price5 = price5T;
+    progress2 = 0;
+    progress = progress3;
+    width = 0;
+    elem.style.width = width + '%';
+    document.getElementById('progressProcent').innerHTML = width + "%";
+}
 
 	function add() {
 
@@ -275,10 +246,12 @@ onmessage = function (event) {\
 				localStorage.setItem("ShowUpgrade2", ShowUpgrade2);
 				localStorage.setItem("upgradeActive1", upgradeActive1);
 				localStorage.setItem("clickAmount", clickAmount);
+                localStorage.setItem("surfaceColor", surfaceColor);
+                localStorage.setItem("isSurfaceColorTrue", isSurfaceColorTrue);
 
 
 			}
-
+  
 				
 
 			function reset() {
@@ -310,9 +283,17 @@ onmessage = function (event) {\
 				ShowUpgrade1 = 0;
 				ShowUpgrade2 = 0;
 				clickAmount = 0;
-                progress = 1000;
+                progress = 50;
                 width = -1;
                 progressBar();
+                progress3 = 50;
+                progress2 = 0;
+                price1T = 0;
+                price2T = 0;
+	            price3T = 0;
+                price4T = 0;
+	            price5T = 0;
+                dps2 = 0;
 
 				if (moneycount == null ) {
  				moneycount = 0;
@@ -320,6 +301,8 @@ onmessage = function (event) {\
 
 				document.getElementById('ClickUpgrade1').style.display = 'none';
 				document.getElementById('ClickUpgrade2').style.display = 'none';
+                document.getElementById("testBtn").style.display = "none";
+                surfaceColor = "#FFF";
 
 
 				update()
@@ -350,6 +333,7 @@ onmessage = function (event) {\
 
 			window.onload = function() {
   			load();
+            document.getElementById("planetTrans").style.webkitAnimationPlayState = "paused";
 			};
 
 			window.onbeforeunload = function(){
@@ -500,11 +484,11 @@ function thousands_separators(num)
 
     function progressBar() {
     var elem = document.getElementById("myBar");   
-    if (width >= widthMax) {
+   if (width >= widthMax) {
     }
     else {
       width++; 
       elem.style.width = width + '%'; 
-      elem.innerHTML = width * 1  + '%';
+      document.getElementById('progressProcent').innerHTML = width + "%";
     }
   }
