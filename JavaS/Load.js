@@ -297,15 +297,33 @@ function load() {
 				localStorage.setItem("clickAmount", clickAmount);
 			}
     
-            if (localStorage.updated >= 1) {
-				clickAmount = localStorage.getItem("updated");
-				clickAmount = parseFloat(updated);
+            if (localStorage.updated >= 0) {
+				updated = localStorage.getItem("updated");
+				updated = parseFloat(updated);
 				}
 
 				else {
 				localStorage.setItem("updated", updated);
 			}
+    
+    if (localStorage.progress2 >= 0) {
+				progress2 = localStorage.getItem("progress2");
+				progress2 = parseFloat(progress2);
+				}
 
+				else {
+				localStorage.setItem("progress2", progress2);
+			}
+    if (localStorage.progress3 >= 0) {
+				progress3 = localStorage.getItem("progress3");
+				progress3 = parseFloat(progress3);
+                progress = progress3;
+				}
+
+				else {
+				localStorage.setItem("progress3", progress3);
+                progress = progress3;
+			}
 				update();
 			
 

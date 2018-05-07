@@ -88,10 +88,10 @@
 	var ups = 0;
     var width = 0;
     var progress = 50;
-    var widthMax = 100;
-    var dps2 = 0;
     var progress2 = 0;
     var progress3 = 50;
+    var widthMax = 100;
+    var dps2 = 0;
     var surfaceColor = "#FFF";
     var isSurfaceColorTrue = 0;
     var dps3 = 0;
@@ -249,6 +249,9 @@ function newPlanetRes() {
                 localStorage.setItem("surfaceColor", surfaceColor);
                 localStorage.setItem("isSurfaceColorTrue", isSurfaceColorTrue);
                 localStorage.setItem("updated", updated);
+                localStorage.setItem("progress", progress);
+                localStorage.setItem("progress2", progress2);
+                localStorage.setItem("progress3", progress3);
 
 
 			}
