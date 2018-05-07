@@ -429,7 +429,6 @@ function newPlanetRes() {
 			    Nav = 0;
 			}
 			
-/*
 var checkStatus;
 
 var element = document.createElement('any');
@@ -445,7 +444,6 @@ setInterval(function() {
     console.log(element);
     console.clear();
 }, 1);
-*/
 
 
 function thousands_separators(num)
