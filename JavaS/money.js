@@ -37,9 +37,9 @@
         if (moneycount >= progress) {
             progress += progress3;
             progressBar();
-            if ((width >= 100) && (progress2 == 0)) {
+            if ((width >= 100) && (rep == 0)) {
+                rep = 1;
             progress2 = progress3 * 100;
-                progress3 = progress3 * 2;
                         console.log("hello")
         document.getElementById("testBtn").style.display = "block";
             }
@@ -96,6 +96,7 @@
     var isSurfaceColorTrue = 0;
     var dps3 = 0;
     var updated = 0;
+    var rep = 0;
 
 	function timer() {
 		moneycount = moneycount + (dps/100);
@@ -201,6 +202,8 @@ function newPlanetRes() {
     progress2 = 0;
     progress = progress3;
     width = 0;
+    progress3 = progress3 * 2;
+    rep = 0;
     elem.style.width = width + '%';
     document.getElementById('progressProcent').innerHTML = width + "%";
 }
@@ -429,6 +432,7 @@ function newPlanetRes() {
 			    Nav = 0;
 			}
 			
+/*
 var checkStatus;
 
 var element = document.createElement('any');
@@ -444,6 +448,7 @@ setInterval(function() {
     console.log(element);
     console.clear();
 }, 1);
+*/
 
 
 function thousands_separators(num)
