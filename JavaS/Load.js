@@ -296,6 +296,15 @@ function load() {
 				else {
 				localStorage.setItem("clickAmount", clickAmount);
 			}
+    
+            if (localStorage.updated >= 1) {
+				clickAmount = localStorage.getItem("updated");
+				clickAmount = parseFloat(updated);
+				}
+
+				else {
+				localStorage.setItem("updated", updated);
+			}
 
 				update();
 			

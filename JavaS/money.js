@@ -95,6 +95,7 @@
     var surfaceColor = "#FFF";
     var isSurfaceColorTrue = 0;
     var dps3 = 0;
+    var updated = 0;
 
 	function timer() {
 		moneycount = moneycount + (dps/100);
@@ -247,6 +248,7 @@ function newPlanetRes() {
 				localStorage.setItem("clickAmount", clickAmount);
                 localStorage.setItem("surfaceColor", surfaceColor);
                 localStorage.setItem("isSurfaceColorTrue", isSurfaceColorTrue);
+                localStorage.setItem("updated", updated);
 
 
 			}
@@ -318,6 +320,11 @@ function newPlanetRes() {
 					--ups;
 				}
 			}
+
+        if (updated == 0) {
+            window.location.reload;
+            updated++;
+        }
 
 			function statsOpen() {
 				if (stats == 0) {
