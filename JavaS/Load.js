@@ -266,25 +266,14 @@ function load() {
 				else {
 				localStorage.setItem("upgradeActive1", upgradeActive1);
 			}
-    
-           if (localStorage.isSurfaceColorTrue >= 0) {
-				isSurfaceColorTrue = localStorage.getItem("isSurfaceColorTrue");
-				isSurfaceColorTrue = parseFloat(isSurfaceColorTrue);
+
+			if ("colorTst" in localStorage) {
+				colorTst = localStorage.getItem("colorTst");
                 console.log("h")
 				}
 
 				else {
-				localStorage.setItem("isSurfaceColorTrue", isSurfaceColorTrue);
-                    console.log("d")
-			}
-
-			if ("surfaceColor" in localStorage) {
-				surfaceColor = localStorage.getItem("surfaceColor");
-                console.log("h")
-				}
-
-				else {
-				localStorage.setItem("surfaceColor", surfaceColor);
+				localStorage.setItem("colorTst", colorTst);
                     console.log("d")
 			}
     

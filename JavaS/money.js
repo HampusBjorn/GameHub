@@ -32,7 +32,7 @@
 		document.getElementById('dpss').innerHTML = "MPS" + " " + thousands_separators(dps.toFixed(1));
 		document.getElementById('clickAmount').innerHTML = "Clicks Done" + " " + thousands_separators(clickAmount);
 		document.getElementById('mpc').innerHTML = "Clicks Per Second" + " " + thousands_separators(clickvalue.toFixed(1));
-        document.getElementById("surface").style.background = surfaceColor;
+        document.getElementById("surface").style.background = colorTst;
 
         if (moneycount >= progress) {
             progress += progress3;
@@ -47,6 +47,7 @@
 
 	}
 
+    var colorTst = "#FFF";
 	var moneycount = 0;
 	var autoClick = 0.2;
 	var autoClick2 = 1;
@@ -92,8 +93,6 @@
     var progress3 = 50;
     var widthMax = 100;
     var dps2 = 0;
-    var surfaceColor = "#FFF";
-    var isSurfaceColorTrue = 0;
     var dps3 = 0;
     var updated = 0;
     var rep = 0;
@@ -115,31 +114,16 @@ if (upgradeNR == 1) {
             clickvalue += 3;
             insideText.innerHTML = "more cash by click!";
             console.log("test");
-            price1 = 15;
-            price2 = 100;
-	        price3 = 1100;
-            price4 = 12000;
-            price5 = 130000;
         }
         else {
         clickvalue = clickvalue * 2;
             insideText.innerHTML = "double cash per click!";
             console.log("test");
-            price1 = 15;
-            price2 = 100;
-	        price3 = 1100;
-            price4 = 12000;
-            price5 = 130000;
         }
     }
     else if (upgradeNR == 2) {
         clickvalue += (dps * 0.03);
         insideText.innerHTML = "click gains 3% of CPS!";
-            price1 = 15;
-            price2 = 100;
-	        price3 = 1100;
-            price4 = 12000;
-            price5 = 130000;
     }  
     else if (upgradeNR == 3) {
         autoClick = autoClick * 1.10;
@@ -149,11 +133,6 @@ if (upgradeNR == 1) {
         autoClick5 = autoClick5 * 1.10;
         insideText.innerHTML = "10% more from everything in shop!";
         console.log("test");
-            price1 = 15;
-            price2 = 100;
-	        price3 = 1100;
-            price4 = 12000;
-            price5 = 130000;
     }
     else if (upgradeNR == 4) {
         dps3 += (dps * 0.02);
@@ -169,8 +148,8 @@ if (upgradeNR == 1) {
     var myInterval = setInterval(function(){ reAni() }, 20000);
     
     function reAni(){
-        surfaceColor = "#FF7F4F";
-        document.getElementById("surface").style.background = surfaceColor;
+        colorTst = '#'+Math.floor(Math.random()*16777215).toString(16);
+        document.getElementById("surface").style.background = colorTst;
         var x = document.getElementById('space').innerHTML;
         document.getElementById('space').innerHTML = x;
         clearInterval(myInterval);
@@ -180,6 +159,11 @@ if (upgradeNR == 1) {
 
 function newPlanetRes() {
     var elem = document.getElementById("myBar"); 
+    price1 = 15;
+    price2 = 100;
+    price3 = 1100;
+    price4 = 12000;
+    price5 = 130000;
     moneycount = 0;
     ammount1 = 0;
 	ammount2 = 0;
@@ -189,16 +173,6 @@ function newPlanetRes() {
     dps = 0;
     dps = dps3;
     dps3 = 0;
-    price1T = price1;
-    price2T = price2;
-    price3T = price3;
-    price4T = price4;
-    price5T = price5;     
-    price1 = price1T;
-    price2 = price2T;
-    price3 = price3T;
-    price4 = price4T;   
-    price5 = price5T;
     progress2 = 0;
     progress = progress3;
     width = 0;
@@ -249,8 +223,7 @@ function newPlanetRes() {
 				localStorage.setItem("ShowUpgrade2", ShowUpgrade2);
 				localStorage.setItem("upgradeActive1", upgradeActive1);
 				localStorage.setItem("clickAmount", clickAmount);
-                localStorage.setItem("surfaceColor", surfaceColor);
-                localStorage.setItem("isSurfaceColorTrue", isSurfaceColorTrue);
+                localStorage.setItem("colorTst", colorTst);
                 localStorage.setItem("updated", updated);
                 localStorage.setItem("progress", progress);
                 localStorage.setItem("progress2", progress2);
@@ -309,7 +282,7 @@ function newPlanetRes() {
 				document.getElementById('ClickUpgrade1').style.display = 'none';
 				document.getElementById('ClickUpgrade2').style.display = 'none';
                 document.getElementById("testBtn").style.display = "none";
-                surfaceColor = "#FFF";
+                colorTst = "#FFF";
 
 
 				update()
