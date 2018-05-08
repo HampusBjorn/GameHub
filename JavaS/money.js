@@ -32,6 +32,7 @@
 		document.getElementById('dpss').innerHTML = "MPS" + " " + thousands_separators(dps.toFixed(1));
 		document.getElementById('clickAmount').innerHTML = "Clicks Done" + " " + thousands_separators(clickAmount);
 		document.getElementById('mpc').innerHTML = "Clicks Per Second" + " " + thousands_separators(clickvalue.toFixed(1));
+        document.getElementById('planetsTraveled').innerHTML = "You are on your" + " " + thousands_separators(planets) + " planet!";
         document.getElementById("surface").style.background = colorTst;
 
         if (moneycount >= progress) {
@@ -96,6 +97,7 @@
     var dps3 = 0;
     var updated = 0;
     var rep = 0;
+    var planets = 1;
 
 	function timer() {
 		moneycount = moneycount + (dps/100);
@@ -178,6 +180,7 @@ function newPlanetRes() {
     width = 0;
     progress3 = progress3 * 2;
     rep = 0;
+    planets++;
     elem.style.width = width + '%';
     document.getElementById('progressProcent').innerHTML = width + "%";
 }
@@ -228,6 +231,7 @@ function newPlanetRes() {
                 localStorage.setItem("progress", progress);
                 localStorage.setItem("progress2", progress2);
                 localStorage.setItem("progress3", progress3);
+                localStorage.setItem("planets", planets);
 
 
 			}
@@ -235,6 +239,10 @@ function newPlanetRes() {
 				
 
 			function reset() {
+                var alert2 = confirm("This action will reset your progress! Are you sure?");
+                
+                if (alert2 == true) {
+                planets = 1;
 				moneycount = 0;
 				autoClick = 0.2;
 				price1 = 15;
@@ -286,6 +294,8 @@ function newPlanetRes() {
 
 
 				update()
+                    
+                    }
 
 			}
 

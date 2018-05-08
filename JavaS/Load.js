@@ -313,6 +313,16 @@ function load() {
 				localStorage.setItem("progress3", progress3);
                 progress = progress3;
 			}
+    
+     if (localStorage.planets >= 0) {
+				planets = localStorage.getItem("planets");
+				planets = parseFloat(planets);
+				}
+
+				else {
+				localStorage.setItem("planets", planets);
+			}
+    
 				update();
 			
 
