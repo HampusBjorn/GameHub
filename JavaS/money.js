@@ -244,7 +244,7 @@ function newPlanetRes() {
                 if (alert2 == true) {
                 planets = 1;
 				moneycount = 0;
-				autoClick = 0.2;
+				autoClick = 0.20;
 				price1 = 15;
 				price2 = 100;
 				price3 = 1100;
@@ -296,6 +296,7 @@ function newPlanetRes() {
 				update()
                     
                     }
+                save();
 
 			}
 
