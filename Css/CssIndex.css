@@ -302,7 +302,7 @@ body {
     z-index: 1000;
 }
 
-.feedbacklink {
+#feedbacklink {
 	position: absolute;
 	botton: 1vw;
 	font-size: 30vw; 
