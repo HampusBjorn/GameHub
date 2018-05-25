@@ -303,7 +303,7 @@ body {
 }
 
 #feedbacklink {
-	font-size: 30vw; 
+	font-size: 30px; 
 }
 
 @media screen and (max-height: 450px) {
