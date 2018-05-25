@@ -302,6 +302,11 @@ body {
     z-index: 1000;
 }
 
+.feedbacklink {
+	position: absolute;
+	botton: 1vw;
+}
+
 @media screen and (max-height: 450px) {
   .overlay a {font-size: 20px}
   .overlay .closebtn {
