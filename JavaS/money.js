@@ -31,7 +31,7 @@
 
 		document.getElementById('dpss').innerHTML = "MPS" + " " + thousands_separators(dps.toFixed(1));
 		document.getElementById('clickAmount').innerHTML = "Clicks Done" + " " + thousands_separators(clickAmount);
-		document.getElementById('mpc').innerHTML = "Clicks Per Second" + " " + thousands_separators(clickvalue.toFixed(1));
+		document.getElementById('mpc').innerHTML = "Cash per Click" + " " + thousands_separators(clickvalue.toFixed(1));
         document.getElementById('planetsTraveled').innerHTML = "You are on your" + " " + thousands_separators(planets) + " planet!";
         document.getElementById("surface").style.background = colorTst;
 
